@@ -1,0 +1,7 @@
+.locations, 
+.amenities{
+    width: 25%;
+    height: 100%;
+    background-color:purple ;
+    border-right: 1px solid #DDDDDD;
+}
