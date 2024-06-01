@@ -6,6 +6,9 @@
     border-radius: 4px;
     display: flex;
     align-items: center;
+    padding-right: 30px;
+    box-sizing: border-box;
+    position: relative;
 }
 
 button{
@@ -17,7 +20,9 @@ button{
     border: none;
     border-radius: 4%;
     margin-left: 30px;
-    transition: 0.5s;
+    align-self: center;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
 }
 
 button:hover{
