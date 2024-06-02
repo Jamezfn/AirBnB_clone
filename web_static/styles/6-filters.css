@@ -1,4 +1,3 @@
-
 .filters {
     background-color: white;
     height: 70px;
@@ -70,7 +69,7 @@
     position: absolute;
     top: 70px;
     left: 0;
-    list-style-type: none;
+    list-style: none;
     padding: 0;
     box-sizing: border-box;
 }
