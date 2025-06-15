@@ -6,6 +6,12 @@ import json
 import os
 import models
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
 class FileStorage:
     """Serializes instances to JSON file and deserializes JSON file to instances"""
     __file_path = 'file.json'
@@ -37,8 +43,18 @@ class FileStorage:
                     cls_name = data.get('__class__')
                     if cls_name == 'BaseModel':
                         instance = BaseModel(**data)
-                        self.__objects[key] = instance
+                    elif cls_name == 'User':
+                        instance = User(**data)
+                    elif cls_name == 'State':
+                        instance = State(**data)
+                    elif cls_name == 'Amenity':
+                        instance = Amenity
+                    elif cls_name == 'Place':
+                        instance = Place(**data)
+                    elif cls_name == 'Review':
+                        instance = Review(**data)
                     else:
                         continue
+                    self.__objects[key] = instance
         except Exception:
             pass
