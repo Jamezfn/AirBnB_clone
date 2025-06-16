@@ -201,6 +201,25 @@ class HBNBCommand(cmd.Cmd):
             arg = f"{cls_name} {obj_id}"
             self.do_destroy(arg)
             return True
+        elif method.startswith("update(") and method.endswith(")"):
+            args_str = method[7:-1].strip()
+            if not args_str:
+                print("** instance id missing **")
+                return
+            parts = [p.rstrip(',') for p in shlex.split(args_str)]
+            if len(parts) < 3:
+                if len(parts) == 0:
+                    print("** instance id missing **")
+                elif len(parts) == 1:
+                    print("** attribute name missing **")
+                elif len(parts) == 2:
+                    print("** value missing **")
+                return False
+            id, attr_name, attr_val = parts[:3]
+            id = id.strip('"\'')
+            attr_name = attr_name.strip('"\'')
+            self.do_update(f"{cls_name} {id} {attr_name} {attr_val}")
+            return True
         return False
 
 
