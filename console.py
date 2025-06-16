@@ -175,8 +175,14 @@ class HBNBCommand(cmd.Cmd):
             return False
         args_list = arg.split('.')
         cls_name, method = args_list
-        if cls_name in classes and method == "all()":
+        if cls_name not in classes:
+            return False
+        if method == "all()":
                 return self.do_all(cls_name)
+        elif method == "count()":
+            instances = [obj for obj in storage.all().values()
+                         if obj.__class__.__name__ == cls_name]
+            print(len(instances))
         return False
 
 
