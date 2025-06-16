@@ -172,17 +172,35 @@ class HBNBCommand(cmd.Cmd):
     def default(self, arg):
         """Retrieves all instances of a class; <class name>.all()"""
         if '.' not in arg:
-            return False
+            return
         args_list = arg.split('.')
+        if len(args_list) != 2:
+            return
         cls_name, method = args_list
         if cls_name not in classes:
-            return False
+            return
         if method == "all()":
                 return self.do_all(cls_name)
         elif method == "count()":
             instances = [obj for obj in storage.all().values()
                          if obj.__class__.__name__ == cls_name]
             print(len(instances))
+        elif method.startswith("show(") and method.endswith(")"):
+            obj_id = method[5:-1].strip('"\'')
+            if not obj_id:
+                print("** instance id missing **")
+                return
+            arg = f"{cls_name} {obj_id}"
+            self.do_show(arg)
+            return True
+        elif method.startswith("destroy(") and method.endswith(")"):
+            obj_id = method[8:-1].strip('"\'')
+            if not obj_id:
+                print("** instance id missing **")
+                return False
+            arg = f"{cls_name} {obj_id}"
+            self.do_destroy(arg)
+            return True
         return False
 
 
