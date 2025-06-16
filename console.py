@@ -167,6 +167,16 @@ class HBNBCommand(cmd.Cmd):
         setattr(obj, attr, cast_value)
         obj.save()
 
+    def default(self, arg):
+        """Retrieves all instances of a class; <class name>.all()"""
+        if '.' not in arg:
+            return False
+        args_list = arg.split('.')
+        cls_name, method = args_list
+        if cls_name in classes and method == "all()":
+                return self.do_all(cls_name)
+        return False
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
